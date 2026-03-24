@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grimm's workshop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html" class="site-title">grimm's workshop</a>
+      <p class="site-subtitle">// terminal enthusiast & automation</p>
+      <nav>
+        <a href="index.html" class="active">home</a>
+        <a href="#projects">projects</a>
+        <a href="#posts">posts</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          
+          <a href="projects/rhcase.html" class="project-card">
+            <h3><span class="status active"></span>rhcase</h3>
+            <p>A command-line interface for managing and querying enterprise support cases. Built to streamline workflows, handle attachments, and interface with ticketing systems directly from the terminal.</p>
+            <div class="project-tags">
+              <span class="tag python">python</span>
+              <span class="tag">cli</span>
+              <span class="tag">automation</span>
+            </div>
+          </a>
+
+          <a href="projects/osidb-query.html" class="project-card">
+            <h3><span class="status active"></span>osidb-query</h3>
+            <p>CLI toolset for querying Open Source Incident Database (OSIDB) metrics. Designed to simplify vulnerability lookups, bulk queries, and security advisory tracking.</p>
+            <div class="project-tags">
+              <span class="tag python">python</span>
+              <span class="tag">security</span>
+              <span class="tag">api</span>
+            </div>
+          </a>
+
+          <a href="#" class="project-card">
+            <h3><span class="status active"></span>agentic-workflows</h3>
+            <p>Structured AI prompts and scripts for automating complex technical analysis and case management workflows.</p>
+            <div class="project-tags">
+              <span class="tag">prompts</span>
+              <span class="tag">ai</span>
+              <span class="tag">orchestration</span>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+      <section id="posts">
+        <h2>Recent Posts</h2>
+        <ul class="posts-list">
+
+          <li class="post-item">
+            <a href="posts/hello-world.html" class="post-link">
+              <span class="post-date">2026-03-24</span>
+              <h3 class="post-title">Hello World: Moving to the Public Web</h3>
+              <p class="post-excerpt">Transitioning my internal notes and tool documentation out to the public internet, one static HTML file at a time.</p>
+            </a>
+          </li>
+
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>grimm | powered by stubbornness and caffeine</p>
+    </footer>
+  </div>
+</body>
+</html>
