@@ -1,0 +1,536 @@
+/* grimm's workshop - Parchment & Pencil Sketch aesthetic */
+/* Inspired by Leonardo da Vinci's notebooks */
+
+:root {
+  --bg-parchment: #f4efe1;
+  --bg-parchment-dark: #e8e0cc;
+  --bg-card: #ece5d3;
+  --bg-hover: #e2d9c3;
+  --border: #c4b698;
+  --border-dark: #a89878;
+  --text-primary: #2c2416;
+  --text-secondary: #5a4e3a;
+  --text-muted: #8a7e6a;
+  --accent-ink: #1a1408;
+  --accent-sepia: #704214;
+  --accent-red: #8b2500;
+  --accent-blue: #2c4a6e;
+  --accent-gold: #8b7535;
+  --font-serif: 'EB Garamond', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+  --font-mono: 'Courier Prime', 'Courier New', Courier, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 17px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-serif);
+  background: var(--bg-parchment);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* Subtle parchment texture via gradient noise */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 117, 53, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(112, 66, 20, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(139, 117, 53, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header */
+header {
+  border-bottom: 2px solid var(--border-dark);
+  padding: 2.5rem 0;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+/* Decorative sketch line under header */
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+.site-title {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.02em;
+}
+
+.site-title::before {
+  content: '✦';
+  color: var(--accent-gold);
+  margin-right: 0.6rem;
+  font-style: normal;
+  font-size: 0.7em;
+}
+
+.site-title:hover {
+  color: var(--accent-sepia);
+}
+
+.site-subtitle {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+nav {
+  margin-top: 1.5rem;
+}
+
+nav a {
+  font-family: var(--font-serif);
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-right: 2rem;
+  font-size: 1rem;
+  font-style: italic;
+  transition: color 0.2s;
+  position: relative;
+}
+
+nav a:hover {
+  color: var(--accent-sepia);
+}
+
+nav a.active {
+  color: var(--accent-sepia);
+  font-weight: 600;
+}
+
+nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent-sepia);
+}
+
+/* Section headings */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-style: italic;
+}
+
+h2::before {
+  content: '§';
+  color: var(--accent-gold);
+  margin-right: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Project cards */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: block;
+  position: relative;
+}
+
+/* Sketch-style corner decoration */
+.project-card::before {
+  content: '┌';
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  color: var(--border-dark);
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.project-card::after {
+  content: '┘';
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  color: var(--border-dark);
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.project-card:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent-sepia);
+  transform: translateY(-1px);
+  box-shadow: 2px 3px 8px rgba(44, 36, 22, 0.1);
+}
+
+.project-card h3 {
+  font-size: 1.15rem;
+  color: var(--accent-sepia);
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+.project-card p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  margin-bottom: 1rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  background: var(--bg-parchment);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.tag.python { border-color: var(--accent-gold); color: var(--accent-gold); }
+.tag.rust { border-color: var(--accent-red); color: var(--accent-red); }
+.tag.typescript { border-color: var(--accent-blue); color: var(--accent-blue); }
+.tag.ansible { border-color: var(--accent-red); color: var(--accent-red); }
+
+/* Blog posts list */
+.posts-list {
+  list-style: none;
+}
+
+.post-item {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-item:last-child {
+  border-bottom: none;
+}
+
+.post-link {
+  text-decoration: none;
+  display: block;
+}
+
+.post-link:hover .post-title {
+  color: var(--accent-sepia);
+}
+
+.post-date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.post-title {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  transition: color 0.2s;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.post-excerpt {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 2px solid var(--border-dark);
+  text-align: center;
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+footer p {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Article pages */
+article {
+  max-width: 720px;
+}
+
+article h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+article .meta {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+article p {
+  margin-bottom: 1.25rem;
+}
+
+article code {
+  font-family: var(--font-mono);
+  background: var(--bg-card);
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  font-size: 0.88em;
+  color: var(--accent-sepia);
+}
+
+article pre {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+article pre code {
+  background: none;
+  padding: 0;
+  color: var(--text-primary);
+}
+
+article a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+article a:hover {
+  border-bottom-color: var(--accent-blue);
+}
+
+/* Article images */
+article figure {
+  margin: 2rem 0;
+}
+
+article figure img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  /* Give images a slightly aged/sketch feel */
+  filter: sepia(8%) contrast(1.02);
+}
+
+article figure.article-hero {
+  margin: 2rem -2rem;
+  width: calc(100% + 4rem);
+  max-width: none;
+}
+
+article figure.article-hero img {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}
+
+article figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+/* Lead paragraph - manuscript annotation style */
+article .lead {
+  font-size: 1.12rem;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+/* Article lists */
+article ul, article ol {
+  margin: 1.25rem 0 1.25rem 1.5rem;
+}
+
+article li {
+  margin-bottom: 0.5rem;
+}
+
+/* Blockquotes - manuscript margin note style */
+article blockquote {
+  border-left: 3px solid var(--accent-sepia);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  background: var(--bg-card);
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* Subheadings */
+article h2 {
+  font-size: 1.4rem;
+  color: var(--accent-sepia);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+article h2::before {
+  content: '§';
+  color: var(--accent-gold);
+  margin-right: 0.5rem;
+  font-style: normal;
+}
+
+article h3 {
+  font-size: 1.1rem;
+  color: var(--accent-sepia);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+article h3::before {
+  content: '❧';
+  color: var(--text-muted);
+  margin-right: 0.5rem;
+  font-style: normal;
+  font-size: 0.85em;
+}
+
+/* Back link */
+.back-link {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.back-link:hover {
+  color: var(--accent-sepia);
+}
+
+.back-link::before {
+  content: '←';
+  margin-right: 0.5rem;
+}
+
+/* Status indicator */
+.status {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.status.active { background: var(--accent-gold); }
+.status.wip { background: var(--accent-sepia); }
+.status.planned { background: var(--text-muted); }
+
+/* Horizontal rules */
+article hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem auto;
+  width: 40%;
+  position: relative;
+}
+
+article hr::after {
+  content: '✦';
+  position: absolute;
+  top: -0.6em;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-parchment);
+  padding: 0 0.5rem;
+  color: var(--accent-gold);
+  font-size: 0.8rem;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(139, 117, 53, 0.2);
+  color: var(--text-primary);
+}

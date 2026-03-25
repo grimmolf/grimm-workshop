@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your AI Tools Aren't Broken | grimm's workshop</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../index.html" class="site-title">grimm's workshop</a>
+      <p class="site-subtitle">// terminal enthusiast &amp; automation</p>
+      <nav>
+        <a href="../index.html">home</a>
+        <a href="../index.html#projects">projects</a>
+        <a href="../index.html#posts" class="active">posts</a>
+      </nav>
+    </header>
+
+    <main>
+      <a href="../index.html" class="back-link">back to posts</a>
+
+      <article>
+        <h1>Your AI Tools Aren't Broken&mdash;Your Workflow Is</h1>
+        <div class="meta">
+          2026-01-25 | AI workflows, task decomposition, TAM productivity, delegation skills
+        </div>
+
+        <p class="lead">
+          <em>Putting Nate Johnson's "6 Skills" framework into practice&mdash;what effective AI collaboration actually looks like in day-to-day knowledge work</em>
+        </p>
+
+        <figure class="article-hero">
+          <img src="../assets/images/workflow-decomposition-hero.png" alt="A complex workflow broken down into discrete, delegatable steps with clear inputs and outputs">
+        </figure>
+
+        <p>
+          I recently watched a video by Nate Johnson (<a href="https://youtu.be/EZ4EjJ0iDDQ">Why Your Best Employees Quit Using AI After 3 Weeks</a>) where he reviewed a Microsoft study that tracked 300,000 employees using AI tools. The findings were striking: initial enthusiasm faded quickly, and within a few months the majority of users had stopped using the tools entirely.
+        </p>
+
+        <p>
+          Johnson explores why this pattern repeats across organizations and identifies six skills that distinguish people who get sustained value from AI. The key reframe he offers: working effectively with AI has less to do with learning a new tool and more to do with applying skills we already use when delegating to and managing people.
+        </p>
+
+        <p>
+          The video is worth watching in full&mdash;he lays out the framework clearly and explains the research behind it. This post is a companion piece: <strong>what does implementing these skills actually look like in day-to-day work?</strong>
+        </p>
+
+        <p>
+          I'll use support case analysis as a concrete example, but the pattern applies to any knowledge work where you're trying to get real value from AI tools.
+        </p>
+
+        <h2>Where Most People Get Stuck</h2>
+
+        <p>
+          There's a common progression with AI tools:
+        </p>
+
+        <p>
+          <strong>The starting point:</strong> You type a general request into Gemini&mdash;"help me with this report." You get something generic. You try again with more detail. You get something confidently wrong. You decide it's faster to just do it yourself.
+        </p>
+
+        <p>
+          At this stage, people either dump entire documents into AI expecting magic, or provide almost no context and hope for the best. Both approaches produce mediocre results.
+        </p>
+
+        <p>
+          <strong>The productive middle ground:</strong> This is where real value lives&mdash;and where most training programs never take you. At this level, you understand that AI output quality depends heavily on input quality. You treat first drafts as starting points, not finished products. You've developed a sense for which parts of your work benefit from AI and which parts require your judgment.
+        </p>
+
+        <p>
+          <strong>Deep technical integration:</strong> This is where you're building custom tools, working with APIs, understanding technical constraints. Most people don't need to get here&mdash;and that's fine. But the skills you develop in the middle ground transfer to any tool.
+        </p>
+
+        <p>
+          The problem is that most people get stuck at the starting point, blame the tools, and never discover what's possible when you approach AI as a collaborator rather than a magic box.
+        </p>
+
+        <h2>The Six Skills (From Johnson's Framework)</h2>
+
+        <figure class="article-image">
+          <img src="../assets/images/six-skills-sequence.png" alt="The six skills arranged as a sequential workflow: decomposition leads to context assembly, then quality judgment, iterative refinement, and workflow integration">
+        </figure>
+
+        <p>
+          In the video, Johnson identifies six capabilities that distinguish people who get sustained value from AI. I'm summarizing them here, but watch <a href="https://youtu.be/EZ4EjJ0iDDQ">the video</a> for his full explanation and the research context.
+        </p>
+
+        <p>
+          Based on my experience implementing these, I'd suggest thinking about them in a specific order&mdash;as a sequence for building an effective AI workflow rather than a list of independent skills:
+        </p>
+
+        <p>
+          <strong>1. Task Decomposition</strong> &ndash; This has to come first. Before you can delegate anything, you need to understand exactly what you're asking your AI collaborator to do. What are the actual steps involved? What does each step produce? You can't effectively delegate "analyze this case"&mdash;you need to break that down into the discrete subtasks that analysis actually involves.
+        </p>
+
+        <p>
+          <strong>2. Context Assembly</strong> &ndash; Once you've decomposed the task, you can identify what data each step needs as input and what it should produce as output. This includes intermediate outputs between steps, not just the final deliverable. The decomposition tells you <em>what</em> to do; context assembly figures out <em>what information</em> each step requires.
+        </p>
+
+        <p>
+          <strong>3. Quality Judgment and Frontier Recognition</strong> &ndash; These work together. As the domain expert, you know where people new to this task typically make mistakes. You also learn where AI models have known weaknesses (math, precise counting, recent events). This knowledge tells you where to scrutinize output carefully and where AI can handle things reliably.
+        </p>
+
+        <p>
+          <strong>4. Iterative Refinement</strong> &ndash; With the above in place, you can review output at each stage and provide specific feedback: what's missing, what context needs to be added, what language needs adjustment. This isn't generic "make it better"&mdash;it's informed by your quality judgment about what good output looks like.
+        </p>
+
+        <p>
+          <strong>5. Workflow Integration</strong> &ndash; Finally, once you have a working pipeline, you start building it into how you actually work. This is where the occasional experiment becomes a standard process.
+        </p>
+
+        <p>
+          What stands out about this list: it's not about prompt syntax or tool features. These are fundamentally about judgment, delegation, and process design&mdash;skills most of us already use in other contexts.
+        </p>
+
+        <p>
+          The rest of this post focuses primarily on that first step&mdash;task decomposition&mdash;because it's foundational. Everything else builds on it.
+        </p>
+
+        <h2>The Key Move: Decomposing Your Expertise</h2>
+
+        <p>
+          Here's where theory meets practice.
+        </p>
+
+        <p>
+          The pattern that seems to separate productive AI users from frustrated ones is straightforward: <strong>they've documented what they actually do.</strong>
+        </p>
+
+        <p>
+          Most of us work on autopilot. We troubleshoot cases, write reports, prepare for meetings&mdash;but if someone asked us to explain exactly what we do, step by step, we'd struggle. The expertise is implicit.
+        </p>
+
+        <p>
+          Consider support case analysis. "Analyze a case" sounds like one task, but it's actually several:
+        </p>
+
+        <ol>
+          <li>Pull the case details and extract the timeline</li>
+          <li>Review any diagnostic data&mdash;sosreports, must-gathers</li>
+          <li>Check for screenshots that might show errors not captured in logs</li>
+          <li>Search the knowledge base for related articles</li>
+          <li>Search JIRA for known issues</li>
+          <li>Review source code and public documentation</li>
+          <li>Test hypotheses against the actual data</li>
+          <li>Generate the deliverables&mdash;customer updates, internal notes, emails</li>
+        </ol>
+
+        <p>
+          Eight steps. Each with specific inputs. Each with specific data sources. Each with specific outputs.
+        </p>
+
+        <p>
+          This decomposition is foundational for effective AI use. Once you can describe exactly what analysis you need and where to get the data, AI stops being a generic assistant and becomes genuinely useful. You're not asking it to figure out how to do your job&mdash;you're delegating specific, well-defined subtasks.
+        </p>
+
+        <p>
+          The prompts that work aren't clever AI tricks. They're expertise made explicit&mdash;the same process that's been running implicitly, now documented in a way that can be followed.
+        </p>
+
+        <h2>Why Decomposition Matters: The Delegation Problem</h2>
+
+        <p>
+          When you work with AI&mdash;especially agentic tools connected to real data sources&mdash;you're essentially delegating to a collaborator who has read every manual and knows every product spec, but has never done <em>your</em> specific job.
+        </p>
+
+        <p>
+          Effective delegation requires being able to explain the task. And most of us can't explain tasks we do on autopilot.
+        </p>
+
+        <p>
+          This is why task decomposition is the enabling skill. It forces implicit expertise to become explicit. Once it's explicit, delegation becomes possible.
+        </p>
+
+        <p>
+          <strong>What effective delegation to AI looks like:</strong>
+        </p>
+
+        <ul>
+          <li><strong>Clear task definition.</strong> "Help me with this case" is too vague. "Pull the diagnostic data from the sosreport, run the Insights analysis, and update the hypothesis list with your findings" gives direction. But you can only give that direction if you've mapped out what "analyzing a case" actually means.</li>
+          <li><strong>Knowing what to delegate.</strong> Some tasks benefit from AI's ability to search broadly and synthesize quickly. Others require institutional memory and relationship context. The decomposition helps you see which is which.</li>
+          <li><strong>Built-in iteration.</strong> Effective workflows don't assume the first output is final. Each step can explicitly require updating a working document&mdash;building refinement into the process rather than hoping for a perfect first draft.</li>
+          <li><strong>Defined outputs.</strong> Each subtask should produce something concrete: a timeline, a hypothesis list, a draft email. This makes review possible and keeps the work moving forward.</li>
+        </ul>
+
+        <h2>What This Looks Like in Practice</h2>
+
+        <p>
+          Here's how task decomposition changes AI interaction, using case analysis as the example:
+        </p>
+
+        <p>
+          <strong>Without decomposition:</strong>
+        </p>
+
+        <blockquote>
+          "Help me analyze support case 12345678"
+        </blockquote>
+
+        <p>
+          AI response: Generic troubleshooting suggestions. Maybe asks clarifying questions. Produces something you could have gotten from a Google search.
+        </p>
+
+        <p>
+          <strong>With decomposition:</strong>
+        </p>
+
+        <blockquote>
+          "In the extracts subdirectory, I have saved several files containing the details about support case 12345678. Please review these and generate an incident timeline, detailed problem statement, and a list of potential hypotheses for the underlying cause with short explanations and what information is needed for validation listed with each hypothesis."
+        </blockquote>
+
+        <p>
+          AI response: Structured analysis based on actual case data. Specific hypotheses tied to specific evidence. Clear next steps for validation.
+        </p>
+
+        <p>
+          The difference isn't better prompting&mdash;it's that the request specifies exactly what's needed (timeline, problem statement, hypotheses) and where to find the data (extracts subdirectory). That specificity is only possible after decomposing "analyze a case" into concrete subtasks.
+        </p>
+
+        <p>
+          For hypothesis validation, the decomposed approach continues:
+        </p>
+
+        <blockquote>
+          "Develop tests to validate/invalidate each hypothesis using the remote diagnostic environment. For each hypothesis, construct a validation command, execute it, and update the hypotheses file with the exact command used, a snippet of the relevant output, and the updated status."
+        </blockquote>
+
+        <p>
+          This isn't asking AI to figure out how to validate hypotheses. It's delegating a specific, well-scoped task: run these tests, document the commands, update this file. The structure comes from domain expertise; the execution gets amplified by AI.
+        </p>
+
+        <h2>Going Further: Connected Tools</h2>
+
+        <h3>Why Data Access Matters</h3>
+
+        <p>
+          Once a workflow is decomposed, a limitation of web-based AI becomes apparent: the AI can follow the steps, but it can't always access the data.
+        </p>
+
+        <p>
+          This matters more than convenience. AI models are eager to be helpful&mdash;sometimes too eager. When they have incomplete information, they'll make a best guess at what the missing pieces might be. This is what we call hallucination, and it's one of the primary reasons AI output can be confidently wrong.
+        </p>
+
+        <p>
+          The key to reducing hallucinations is making sure the AI has all the data it needs. An AI with complete context produces dramatically better output than one that's guessing to fill in gaps.
+        </p>
+
+        <h3>Developer Tools That Aren't Just for Developers</h3>
+
+        <figure class="article-image">
+          <img src="../assets/images/agentic-tools-iceberg.png" alt="An iceberg showing developer tools above water but general-purpose agentic capabilities below the surface">
+        </figure>
+
+        <p>
+          Tools like Cursor, Gemini CLI, and Claude Code can help solve the data access problem. They can access files on your system, run commands, and use tools directly&mdash;which means they can pull information from available APIs rather than relying on what you paste into a chat window.
+        </p>
+
+        <p>
+          Here's the thing: <strong>these tools are general-purpose agentic tools disguised as developer tools.</strong> Yes, they're marketed to developers and they're excellent for writing code. But the core capability&mdash;an AI that can read files, execute commands, and interact with your system&mdash;is useful for any knowledge work that involves data. The "developer tool" label undersells what they actually are.
+        </p>
+
+        <h3>Data Governance and Approved Use</h3>
+
+        <p>
+          You need to be careful about what information you provide to which cloud-based LLMs. Every organization has (or should have) policies about which tools are approved for use with which types of data&mdash;especially when it comes to customer or sensitive information. Know your organization's policies before connecting AI tools to internal data sources.
+        </p>
+
+        <p>
+          Rather than connecting AI directly to customer data, I've used tools like Cursor and Claude Code to build utilities that pull data from appropriate internal APIs, which I can then feed to approved AI tools within sanctioned environments. You don't have to build these yourself&mdash;feel free to use existing tools like <code>rhcase</code> or ones others have developed.
+        </p>
+
+        <h3>Finding Your Organization's Boundaries</h3>
+
+        <p>
+          Right now, these agentic tools are broadly accepted for development work in most organizations, but the boundaries for other use cases are still evolving. If you've done the task decomposition work for your own workflows and see potential for agentic tools beyond coding, I'd encourage you to work with your organization's AI governance team to define and expand what's approved. The more concrete, well-defined examples you can provide of non-coding applications, the faster the policies can evolve to match reality. Your workflow might be the one that opens the door for others.
+        </p>
+
+        <h3>The Bottom Line on Connected Tools</h3>
+
+        <p>
+          This path isn't required for productive AI use&mdash;the decomposition and delegation skills work with any tool. But for workflows that involve internal data, finding approved ways to get that data to your AI collaborator makes a real difference in output quality.
+        </p>
+
+        <h2>You Don't Have to Build Anything</h2>
+
+        <p>
+          Let me be clear about something: <strong>you don't need to code to reach the productive middle ground.</strong>
+        </p>
+
+        <p>
+          The six skills from Johnson's framework&mdash;context assembly, quality judgment, task decomposition, iterative refinement, workflow integration, and frontier recognition&mdash;are entirely tool-agnostic. You can practice them in Gemini right now, whether you're using it in Google Docs, in the web interface, or elsewhere.
+        </p>
+
+        <p>
+          The difference between the starting point and the productive middle ground:
+        </p>
+
+        <figure class="article-image">
+          <img src="../assets/images/starting-point-vs-productive.png" alt="Comparison table: Starting Point shows vague prompts, accepting first drafts, and using AI only when stuck. Productive Middle Ground shows specific detailed prompts, iterative refinement, and AI as part of default workflow.">
+        </figure>
+
+        <p>
+          The second approach requires more upfront thought. But it converts "AI doesn't get me" into "AI actually saves me time."
+        </p>
+
+        <h2>What Connected Tools Enable</h2>
+
+        <p>
+          For workflows that touch internal data repeatedly, connected AI tools open additional possibilities:
+        </p>
+
+        <ul>
+          <li>Preparing for a customer meeting by pulling their recent support cases, product configuration, and account notes automatically</li>
+          <li>Building analyses from real internal documents rather than generic web knowledge</li>
+          <li>Summarizing activity with a customer based on actual communication history</li>
+        </ul>
+
+        <p>
+          Tools like Cursor and Claude Code can connect to APIs, databases, and file systems. The result is AI that works with actual context rather than requiring manual copy-paste for every interaction.
+        </p>
+
+        <p>
+          This isn't necessary for reaching the productive middle ground, but it removes friction for data-intensive workflows.
+        </p>
+
+        <h2>Getting Started</h2>
+
+        <p>
+          <strong>The essential first step:</strong><br>
+          Pick one recurring task. Write down exactly what you do&mdash;not the high-level description, but the actual sequence of steps. What data do you need at each step? Where does it come from? What does the output look like?
+        </p>
+
+        <p>
+          <strong>Then apply the basics:</strong>
+        </p>
+
+        <ul>
+          <li>Provide context deliberately. Tell AI what you need and where to find relevant information.</li>
+          <li>Treat outputs as drafts. Build review and refinement into your process.</li>
+          <li>Document what works and what doesn't. AI capabilities vary by task type&mdash;learn where the boundaries are for your work.</li>
+        </ul>
+
+        <p>
+          <strong>For those interested in going further:</strong>
+        </p>
+
+        <ul>
+          <li>Tools like Gemini CLI are less intimidating than they appear</li>
+          <li>The decomposition work transfers directly&mdash;once you know what data you need, connecting to it becomes a defined problem</li>
+          <li>Start with the workflow design; the tooling follows</li>
+        </ul>
+
+        <h2>The Bottom Line</h2>
+
+        <p>
+          Johnson's framework explains <em>why</em> most people hit a wall with AI and what skills matter for breaking through. This post is about <em>how</em>&mdash;what implementation looks like for one specific type of work.
+        </p>
+
+        <p>
+          The pattern that works:
+        </p>
+
+        <ol>
+          <li><strong>Decompose</strong> a recurring task into specific steps with defined inputs and outputs</li>
+          <li><strong>Delegate</strong> well-scoped subtasks with clear context</li>
+          <li><strong>Iterate</strong> rather than expecting perfect first drafts</li>
+          <li><strong>Verify</strong> outputs against the requirements of each step</li>
+        </ol>
+
+        <p>
+          The starting point is picking one task you do regularly and writing down exactly what that involves. Not "analyze cases" but the eight (or ten, or twelve) discrete steps that analysis actually requires. That documentation is the foundation everything else builds on.
+        </p>
+
+        <p>
+          If you haven't watched Johnson's video yet, start there for the framework: <a href="https://youtu.be/EZ4EjJ0iDDQ">Why Your Best Employees Quit Using AI After 3 Weeks</a>. Then come back here when you're ready to implement.
+        </p>
+
+        <hr>
+
+        <p>
+          <em>The case analysis workflow referenced in this post is available as a prompt library&mdash;not as a finished product, but as an example of what decomposed AI workflows can look like in practice. The workflow uses <code>rhcase</code>, a CLI tool for Red Hat API access (cases, KCS, Jira).</em>
+        </p>
+
+        <p><em>&mdash; grimm</em></p>
+
+      </article>
+    </main>
+
+    <footer>
+      <p>grimm | powered by stubbornness and caffeine</p>
+    </footer>
+  </div>
+</body>
+</html>

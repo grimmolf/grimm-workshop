@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Orchestrator Pattern | grimm's workshop</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../index.html" class="site-title">grimm's workshop</a>
+      <p class="site-subtitle">// terminal enthusiast &amp; automation</p>
+      <nav>
+        <a href="../index.html">home</a>
+        <a href="../index.html#projects">projects</a>
+        <a href="../index.html#posts" class="active">posts</a>
+      </nav>
+    </header>
+
+    <main>
+      <a href="../index.html" class="back-link">back to posts</a>
+
+      <article>
+        <h1>The Orchestrator Pattern: Using AI Wisely in Technical Workflows</h1>
+        <div class="meta">
+          2026-01-04 | AI workflows, TAM methodology, tooling philosophy
+        </div>
+
+        <p class="lead">
+          <em>A practical framework for integrating generative AI into enterprise support and troubleshooting</em>
+        </p>
+
+        <figure class="article-hero">
+          <img src="../assets/images/orchestrator-hero.png" alt="An orchestrator directing deterministic tools while maintaining human oversight">
+        </figure>
+
+        <p>
+          Red Hat has embraced AI and generative tools, and I'm personally enthusiastic about their potential. But enthusiasm without discipline is just noise. After months of building and refining AI-assisted workflows for technical support cases, I've arrived at a principle that I think deserves wider discussion: <strong>generative AI should orchestrate and interpret, not execute</strong>.
+        </p>
+
+        <p>
+          The magic isn't in having an LLM do everything. It's in knowing what an LLM <em>shouldn't</em> do.
+        </p>
+
+        <h2>The Smart Intern Problem</h2>
+
+        <figure class="article-image">
+          <img src="../assets/images/smart-intern.png" alt="A brilliant intern with encyclopedic knowledge but no production experience">
+        </figure>
+
+        <p>
+          Here's a mental model that's served me well: <strong>think of AI agents as brilliant interns who've read every textbook but have never touched a production system.</strong>
+        </p>
+
+        <p>
+          They have encyclopedic knowledge. They can synthesize information across domains. They're eager to help and will work tirelessly. But they have zero practical experience, no institutional context, and no intuition for the difference between what <em>should</em> work and what <em>actually</em> works in your environment.
+        </p>
+
+        <p>
+          You wouldn't hand an intern the keys to production and walk away. You'd give them structured tasks, review their work at checkpoints, and use your domain expertise to catch the things they couldn't possibly know. The same discipline applies to AI agents.
+        </p>
+
+        <p>
+          There's also a fundamental technical limitation: generative AI is probabilistic. Every response is a sample from a distribution of possible outputs. For creative tasks, that's a feature. For technical diagnostics, it's a liability. When I'm troubleshooting why a customer's OpenShift cluster is dropping etcd connections, I don't want a probabilistically-likely answer. I want the actual evidence from their actual system.
+        </p>
+
+        <h2>The Orchestrator Pattern</h2>
+
+        <figure class="article-image">
+          <img src="../assets/images/orchestrator-pattern.png" alt="Workflow diagram showing AI orchestrating deterministic tools with human validation gates">
+        </figure>
+
+        <p>
+          The principle I've settled on is simple: <strong>AI agents excel as orchestrators and tool writers, but the tools themselves&mdash;and the judgment calls about their output&mdash;must remain deterministic and human-validated.</strong>
+        </p>
+
+        <p>
+          The key insight is that LLMs are remarkably good at <em>generating</em> tooling. They can write the grep command, the insights rule, the API connector. They can synthesize case context and propose hypotheses. What they can't do is know whether the output makes sense for <em>your</em> specific situation. That's where domain expertise&mdash;your expertise&mdash;remains irreplaceable.
+        </p>
+
+        <p>
+          In my support workflow, the control is in the prompt design <em>and</em> the ongoing steering:
+        </p>
+
+        <ul>
+          <li><strong>I specify which tools to use and how</strong> &ndash; each prompt tells the agent exactly which utilities (the remote diagnostic environment, <code>rhcase</code>, <code>insights run</code>) to invoke and what patterns to follow</li>
+          <li><strong>The agent writes the specific commands</strong> within my specified constraints and executes them</li>
+          <li><strong>Deterministic tools return consistent results</strong> &ndash; the same sosreport through <code>insights run</code> returns the same findings every time</li>
+          <li><strong>I review output and course-correct</strong> &ndash; when the problem statement misses context or a hypothesis is off-base, I inject that knowledge and have the agent revise</li>
+          <li><strong>I iterate on deliverables</strong> until they're defensible by me, the support engineers, and most importantly, the customer</li>
+        </ul>
+
+        <p>
+          The human expertise isn't just in designing the initial workflow &ndash; it's in <em>steering the process based on output</em>. I've built up a library of prompts that encode my diagnostic methodology, but I'm actively involved at each stage, adding context the agent couldn't know and pushing back when something doesn't make sense.
+        </p>
+
+        <h2>My Actual Workflow: A Concrete Example</h2>
+
+        <p>
+          Here's how this plays out in practice. I've developed a multi-step prompt sequence for support case analysis, where each prompt specifies exactly which tools to use and how &ndash; but it's not a rigid pipeline. I'm actively steering throughout.
+        </p>
+
+        <h3>Step 1: Initial Case Analysis</h3>
+        <p>
+          I tell the agent: "Review the case files and generate an incident timeline, problem statement, and hypotheses." This is pure synthesis &ndash; the agent reads unstructured case data and produces structured analysis artifacts.
+        </p>
+        <p>
+          <em>Where steering happens</em>: The agent might produce a problem statement that's technically accurate but misses context I have from previous interactions with this customer. I add that context: "The customer mentioned in a call last week that they recently migrated from version X &ndash; factor that in." The agent revises.
+        </p>
+
+        <h3>Step 2: Insights Analysis</h3>
+        <p>
+          My prompt specifies: "Use the support shell environment to list attachments, identify sosreports or must-gathers, then run <code>insights run</code> with the appropriate rule pack." The agent writes the specific commands, but I've constrained <em>which tools</em> and <em>what patterns</em> to use.
+        </p>
+        <p>
+          The insights-core rules themselves are fully deterministic &ndash; codified pattern-matching that returns the same findings for the same input, every time. The agent just invokes them correctly.
+        </p>
+
+        <h3>Step 3: Research Phase</h3>
+        <p>
+          I have separate prompts that direct the agent to use <code>rhcase kcs search</code> for Knowledge Base articles and <code>rhcase jira search</code> for related issues. These tools handle the API authentication and data retrieval; the agent constructs appropriate search terms and fetches relevant results.
+        </p>
+        <p>
+          <strong>This is where the time savings become dramatic.</strong> Manually searching KCS, reading through potentially relevant articles, cross-referencing JIRA issues, and digging through upstream source code on GitHub can easily consume hours. The agent does this in minutes, returning full links to relevant articles and specific code snippets I can verify. It's not doing anything I couldn't do &ndash; it's doing the tedious retrieval work at machine speed while I focus on interpretation.
+        </p>
+        <p>
+          <em>Where steering happens</em>: Sometimes the agent's search terms miss the mark. I'll redirect: "Search for the specific error code from line 47 of the stack trace, not the generic exception type."
+        </p>
+
+        <h3>Step 4: Hypothesis Validation</h3>
+        <p>
+          My prompt says: "For each hypothesis, construct a validation command using the support shell environment targeting files in <code>/cases/&lt;casenumber&gt;/</code>." The agent generates specific grep commands, omc queries, or log analysis &ndash; but within the execution environment I've specified.
+        </p>
+        <p>
+          <em>Where steering happens</em>: If a hypothesis gets invalidated, I might add context that suggests a different direction: "Given that we've ruled out network issues, let's look at whether the certificate rotation timing aligns with the reported failures."
+        </p>
+
+        <h3>Step 5: Deliverable Generation</h3>
+        <p>
+          Finally, I have a detailed prompt specifying exactly what documents to generate, what formatting rules to follow, what disclaimers to include, and what style guide to reference.
+        </p>
+        <p>
+          <em>Where steering happens</em>: This is where I spend the most time iterating. The first draft is rarely the final draft. I push back: "This recommendation isn't defensible &ndash; we don't have evidence that X caused Y, only correlation. Soften the language." Or: "The customer won't be able to validate this claim without access to the JIRA &ndash; either link it or remove the assertion." We go back and forth until every claim in the deliverable can be validated by the customer, the support engineers, and me.
+        </p>
+
+        <p>
+          The key insight: <strong>this isn't a fire-and-forget pipeline</strong>. The prompts encode my methodology, but I'm actively involved throughout &ndash; injecting context the agent couldn't know, redirecting when analysis goes off-track, and iterating on deliverables until they meet the standard of "defensible by everyone who reads them."
+        </p>
+
+        <p>
+          What I'm <em>not</em> doing is the hours of tedious research that used to dominate my case work. The agent handles the retrieval &ndash; searching documentation, pulling JIRA context, finding relevant source code &ndash; and presents me with linked, verifiable references. My time goes toward the judgment calls that actually require domain expertise.
+        </p>
+
+        <h2>Why This Matters: Consistency and Contribution</h2>
+
+        <figure class="article-image">
+          <img src="../assets/images/knowledge-contribution.png" alt="Resolved cases flowing into deterministic rules that help future troubleshooting">
+        </figure>
+
+        <p>
+          There's a compounding benefit to this approach that goes beyond individual case efficiency.
+        </p>
+
+        <p>
+          When diagnostic logic lives in deterministic rules rather than LLM prompts, that logic becomes shareable. It can be version-controlled, peer-reviewed, and improved incrementally. I'm currently working on a system where resolved support cases can be distilled into new Insights rules that the entire organization can use&mdash;a semi-automated knowledge capture pipeline.
+        </p>
+
+        <p>
+          This only works if the detection logic is deterministic. You can't meaningfully share a prompt that says "look for etcd problems" with the same confidence you can share a rule that says "if <code>/var/log/pods/*/etcd*/etcd/*.log</code> contains entries with <code>took too long</code> exceeding threshold T, flag it."
+        </p>
+
+        <p>
+          The LLM's role in this contribution workflow is to help distill the case resolution into the structured format the rule system requires&mdash;extracting the component taxonomy path, classifying the symptom, and documenting the detection pattern. It's still generative work, but it's generating <em>structure</em>, not executing logic.
+        </p>
+
+        <h2>Practical Takeaways</h2>
+
+        <p>
+          If you're building AI-assisted workflows for technical work, here's what I'd suggest:
+        </p>
+
+        <p>
+          <strong>Your expertise lives in workflow design AND active steering.</strong> The prompts you write encode your methodology, but you're not done once you hit enter. Expect to inject context, redirect when analysis goes off-track, and iterate on outputs. The agent is doing the heavy lifting of synthesis and tool invocation; you're providing the judgment and domain knowledge that keeps it on course.
+        </p>
+
+        <p>
+          <strong>Specify the tools, let the agent write the invocations.</strong> Don't say "figure out how to check the logs." Say "use <code>grep</code> against <code>/var/log/messages</code> looking for patterns X, Y, Z." The agent is good at constructing the specific command; you're good at knowing which tool is appropriate for the situation.
+        </p>
+
+        <p>
+          <strong>Build deterministic tools the agent can invoke.</strong> If you find yourself repeatedly having the agent do the same kind of lookup or analysis, encode that in a tool. I built <code>rhcase</code> specifically so the agent could search KCS and JIRA without me having to handle authentication or API details in every prompt. The tool is deterministic; the agent just calls it.
+        </p>
+
+        <p>
+          <strong>Iterate on deliverables until they're defensible.</strong> The first draft is rarely the final draft. Push back when claims aren't supported by evidence. Demand that every assertion be validatable by the reader. If you can't defend it to the customer or the support engineer, it shouldn't ship.
+        </p>
+
+        <p>
+          <strong>Build for contribution.</strong> When you solve a problem, ask: can this solution be encoded in a way that helps the next person automatically? Deterministic rules (like insights-core) compound over time. Prompt patterns can be shared. The goal is to turn individual expertise into organizational capability.
+        </p>
+
+        <h2>The Bigger Picture</h2>
+
+        <p>
+          This isn't about being skeptical of AI. I use LLMs daily, and they've genuinely transformed how I approach complex support scenarios. But I've also learned that the most powerful AI-assisted workflows aren't the ones where AI does the most work&mdash;they're the ones where AI does the <em>right</em> work, with the <em>right</em> oversight.
+        </p>
+
+        <p>
+          The goal isn't to replace technical expertise with AI. It's to amplify your expertise by offloading the cognitive load of synthesis, tool generation, and documentation while you focus on the judgment calls that actually matter.
+        </p>
+
+        <p>
+          AI is your brilliant intern. Treat it like one: give it structure, review its work, and never forget that your experience and domain knowledge are what turn its raw output into something actually useful.
+        </p>
+
+        <p>
+          When those roles are clear, you get the best of both worlds: the productivity gains of generative AI and the reliability that only comes from human expertise in the loop.
+        </p>
+
+        <h2>What's Next: Closing the Loop</h2>
+
+        <p>
+          The workflow I've described is valuable for individual case efficiency, but the real prize is organizational knowledge capture.
+        </p>
+
+        <p>
+          Right now, when I resolve a case, the knowledge lives in my head, in the case notes, and maybe in a KCS article if someone takes the time to write one. That's a lot of friction between "problem solved" and "everyone benefits from the solution."
+        </p>
+
+        <p>
+          I'm building a system to close that loop &ndash; a repository for contributing structured diagnostic knowledge that others can use. The idea is straightforward: add a step to the workflow where, after a case is resolved, the agent helps distill the symptom-solution pair into a structured YAML contribution. That contribution uses standardized taxonomies &ndash; a component taxonomy (WHAT can break: RHEL kernel, OpenShift control-plane, AAP execution environment) and a symptom taxonomy (HOW things fail: availability/outage, performance/latency, lifecycle/crash-loop).
+        </p>
+
+        <p>
+          The YAML contribution captures:
+        </p>
+
+        <ul>
+          <li>What component was affected and in what version range</li>
+          <li>What symptoms the user observed (mapped to standardized patterns)</li>
+          <li>What detection logic identifies the issue in diagnostic archives</li>
+          <li>What the root cause was and how to fix it</li>
+          <li>Links to KCS, JIRA, and upstream references</li>
+        </ul>
+
+        <p>
+          Then tooling converts that YAML into an actual insights-core rule &ndash; deterministic Python code that will flag this exact issue automatically the next time it appears in a sosreport or must-gather.
+        </p>
+
+        <p>
+          The agent's role is generative: it helps me extract the structured information from the messy reality of case resolution. But the output is a deterministic rule that runs the same way every time, across every customer, without requiring an LLM in the loop.
+        </p>
+
+        <p>
+          This is the compounding benefit of the orchestrator pattern. Every resolved case becomes a potential contribution to organizational knowledge. The agent helps distill; the taxonomies provide structure; the rules provide consistent, deterministic detection. Over time, the easy problems get automated, and human expertise gets focused on the genuinely novel cases.
+        </p>
+
+        <p>
+          That's the goal: not to replace expertise, but to make expertise accumulate.
+        </p>
+
+        <p><em>&mdash; grimm</em></p>
+
+      </article>
+    </main>
+
+    <footer>
+      <p>grimm | powered by stubbornness and caffeine</p>
+    </footer>
+  </div>
+</body>
+</html>

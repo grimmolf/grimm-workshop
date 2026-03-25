@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problems, Symptoms, and Diagnoses | grimm's workshop</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../index.html" class="site-title">grimm's workshop</a>
+      <p class="site-subtitle">// terminal enthusiast &amp; automation</p>
+      <nav>
+        <a href="../index.html">home</a>
+        <a href="../index.html#projects">projects</a>
+        <a href="../index.html#posts" class="active">posts</a>
+      </nav>
+    </header>
+
+    <main>
+      <a href="../index.html" class="back-link">back to posts</a>
+
+      <article>
+        <h1>Three Things That Aren't Each Other: Problems, Symptoms, and Diagnoses</h1>
+        <div class="meta">
+          2026-01-09 | troubleshooting methodology, support engineering, TAM skills
+        </div>
+
+        <p class="lead">
+          <em>A framework for untangling the confusion that derails most troubleshooting conversations before they even begin</em>
+        </p>
+
+        <figure class="article-hero">
+          <img src="../assets/images/three-layers-hero.png" alt="Three-layer troubleshooting model showing Problems, Symptoms, and Diagnoses as distinct abstraction levels">
+        </figure>
+
+        <h2>The Conversation That Goes Sideways</h2>
+
+        <p>
+          Support engineer: "What's the problem?"
+        </p>
+
+        <p>
+          Customer: "The database is slow."
+        </p>
+
+        <p>
+          And we're already off the rails.
+        </p>
+
+        <p>
+          Not because anyone said anything wrong, but because that answer conflates three distinct concepts that need to be teased apart before productive troubleshooting can begin. What the customer gave us isn't a problem statement&mdash;it's a symptom dressed up as a diagnosis. The actual problem statement is probably still unspoken.
+        </p>
+
+        <p>
+          Understanding the difference between these three things is foundational to structured troubleshooting.
+        </p>
+
+        <h2>The Three-Layer Model</h2>
+
+        <p>
+          <strong>Problem Statement</strong>: The business impact. What capability is degraded or lost? What can't users do that they need to do? This is expressed in business terms, not technical ones.
+        </p>
+
+        <p>
+          <strong>Symptoms</strong>: Observable, discrete behaviors that deviate from normal operation. These are technical phenomena&mdash;things you can see in logs, metrics, user reports, or system behavior. A single problem typically produces multiple symptoms.
+        </p>
+
+        <p>
+          <strong>Diagnosis</strong>: The underlying system failure or condition causing the symptoms. This is what's actually broken&mdash;the mechanism that, if fixed, would resolve the symptoms and restore the business capability.
+        </p>
+
+        <p>
+          These three exist at different layers of abstraction, and confusing them derails investigations.
+        </p>
+
+        <h2>An Example, Decomposed</h2>
+
+        <p>
+          <strong>What the customer says</strong>: "The database is slow and we're getting timeout errors."
+        </p>
+
+        <p>
+          <strong>What that actually contains</strong>:
+        </p>
+
+        <ul>
+          <li>A symptom presented as if it were a diagnosis ("database is slow")</li>
+          <li>Another symptom ("timeout errors")</li>
+          <li>No problem statement at all</li>
+        </ul>
+
+        <p>
+          <strong>After proper conversation</strong>:
+        </p>
+
+        <p>
+          <em>Problem Statement</em>: "Customers cannot complete checkout during peak traffic periods, resulting in abandoned carts and lost revenue."
+        </p>
+
+        <p>
+          <em>Symptoms</em>:
+        </p>
+
+        <ul>
+          <li>Checkout API requests timing out after 30 seconds</li>
+          <li>Database connection count at maximum pool size</li>
+          <li>Application logs showing "connection acquisition timeout" errors</li>
+          <li>Increased latency on all database-backed endpoints, not just checkout</li>
+          <li>No corresponding increase in database server CPU or I/O</li>
+        </ul>
+
+        <p>
+          <em>Diagnosis</em>: Connection pool exhaustion caused by a connection leak in the payment validation service. Failed payment validations aren't releasing connections back to the pool, and the leak rate exceeds the connection timeout reclamation rate during high-traffic periods.
+        </p>
+
+        <p>
+          See how different these are? Each layer serves a different purpose:
+        </p>
+
+        <ul>
+          <li>The <strong>problem statement</strong> tells us what success looks like and how urgent this is</li>
+          <li>The <strong>symptoms</strong> tell us where to look and what patterns to seek</li>
+          <li>The <strong>diagnosis</strong> tells us what to fix</li>
+        </ul>
+
+        <h2>Why Customers Give Us Layer Soup</h2>
+
+        <figure class="article-image">
+          <img src="../assets/images/layer-soup.png" alt="The chaos of mixing problems, symptoms, and diagnoses into a confusing blend">
+        </figure>
+
+        <p>
+          When we ask "what's the problem?" customers naturally respond with whatever layer is most salient to them&mdash;usually a mix of symptoms and attempted diagnoses, with the actual problem statement implied but unstated.
+        </p>
+
+        <p>
+          This isn't a failure on their part. Consider the expertise distribution:
+        </p>
+
+        <ul>
+          <li><strong>Customers</strong> are experts in their business domain. They know what the system should accomplish and can articulate when that's not happening. Problem statements live in their territory.</li>
+          <li><strong>Technical teams</strong> are experts in system behavior. Observing and enumerating symptoms, then reasoning from symptoms to diagnosis&mdash;that's our territory.</li>
+        </ul>
+
+        <p>
+          When a customer says "the database is slow," they're attempting to be helpful by offering a diagnosis. But they're doing so from a position of incomplete information about system internals. Meanwhile, the actual problem statement ("checkout is broken and we're losing sales") goes unstated because to them it's obvious context.
+        </p>
+
+        <p>
+          Our job is to pull these layers apart.
+        </p>
+
+        <h2>The Elevation Problem</h2>
+
+        <p>
+          The most common failure mode: we start troubleshooting symptoms without first establishing the problem statement.
+        </p>
+
+        <p>
+          This matters because symptoms can be misleading about priority and scope.
+        </p>
+
+        <p>
+          "Database is slow" might be:
+        </p>
+
+        <ul>
+          <li>A critical checkout-blocking issue during peak sales (drop everything)</li>
+          <li>A minor reporting delay affecting internal dashboards (schedule appropriately)</li>
+          <li>A perceived slowness that's actually normal behavior during backup windows (explain and close)</li>
+        </ul>
+
+        <p>
+          Without the problem statement, we don't know which of these we're dealing with. We might spend hours optimizing query performance for an internal report that nobody urgently needs, while the actual business-critical path has a completely different root cause.
+        </p>
+
+        <p>
+          <strong>Always elevate first</strong>: "Help me understand the business impact&mdash;what are users unable to do, and how is this affecting operations?"
+        </p>
+
+        <h2>The Enumeration Problem</h2>
+
+        <p>
+          The second failure mode: we anchor on the first symptom mentioned and ignore the rest.
+        </p>
+
+        <p>
+          "Timeout errors" is one symptom. But is it the only one? Almost never.
+        </p>
+
+        <p>
+          Complex system failures produce constellations of symptoms. The customer mentions the most painful one&mdash;the thing that triggered the support case&mdash;but there are usually others they've noticed and dismissed, or haven't noticed at all.
+        </p>
+
+        <p>
+          A thorough symptom inventory often reveals patterns invisible from any single symptom:
+        </p>
+
+        <ul>
+          <li>Timing correlations ("it started when we deployed the new payment service")</li>
+          <li>Scope boundaries ("it only affects the EU region")</li>
+          <li>Conspicuous absences ("database CPU is flat even though we're blaming the database")</li>
+        </ul>
+
+        <p>
+          <strong>Always enumerate</strong>: "What else have you observed? What's behaving normally that you'd expect to be affected? When did each symptom first appear?"
+        </p>
+
+        <h2>The Diagnosis Trap</h2>
+
+        <p>
+          The third failure mode: accepting a customer's offered diagnosis without verification.
+        </p>
+
+        <p>
+          "The database is slow" isn't an observation&mdash;it's a conclusion. And conclusions can be wrong.
+        </p>
+
+        <p>
+          When customers offer diagnoses, they're reasoning from limited symptom visibility. They see application timeout errors, they know the application talks to a database, they conclude: database is slow. Seems logical.
+        </p>
+
+        <p>
+          But the actual diagnosis might be:
+        </p>
+
+        <ul>
+          <li>Connection pool exhaustion (database is fine; application can't get connections)</li>
+          <li>Network latency (database is fine; packets are delayed)</li>
+          <li>Application-level queuing (database is fine; requests are waiting before they're even sent)</li>
+          <li>Lock contention (database is fine most of the time; specific operations are blocked)</li>
+        </ul>
+
+        <p>
+          Each of these produces "the application times out when talking to the database" as a symptom, but none of them are "the database is slow."
+        </p>
+
+        <p>
+          <strong>Always verify diagnoses against symptoms</strong>: Does this diagnosis explain ALL observed symptoms? Does it explain the timing? Does it explain the scope? If not, it's not the diagnosis&mdash;it's a hypothesis that failed.
+        </p>
+
+        <h2>The Structured Conversation</h2>
+
+        <figure class="article-image">
+          <img src="../assets/images/structured-conversation.png" alt="Flowchart showing the four steps: Establish Problem, Enumerate Symptoms, Defer Diagnosis, and Formulate & Test">
+        </figure>
+
+        <p>
+          Moving from layer soup to structured understanding is a collaborative process:
+        </p>
+
+        <p>
+          <strong>1. Establish the problem statement first</strong>
+        </p>
+
+        <ul>
+          <li>"What's the business impact here?"</li>
+          <li>"What should users be able to do that they can't?"</li>
+          <li>"How are operations affected?"</li>
+        </ul>
+
+        <p>
+          <strong>2. Enumerate symptoms comprehensively</strong>
+        </p>
+
+        <ul>
+          <li>"Walk me through everything you've observed."</li>
+          <li>"What do the logs show? The metrics? User reports?"</li>
+          <li>"What's behaving normally that you'd expect to be affected?"</li>
+          <li>"When did each symptom first appear? In what order?"</li>
+        </ul>
+
+        <p>
+          <strong>3. Defer diagnosis until symptoms are complete</strong>
+        </p>
+
+        <ul>
+          <li>Resist the urge to hypothesize mechanism until you have the full picture</li>
+          <li>Treat customer-offered diagnoses as hypotheses to verify, not facts to accept</li>
+          <li>Look for symptoms that DON'T fit the proposed diagnosis&mdash;they're often the key</li>
+        </ul>
+
+        <p>
+          <strong>4. Formulate diagnosis as testable hypothesis</strong>
+        </p>
+
+        <ul>
+          <li>"If the diagnosis is X, we should also see Y"</li>
+          <li>"This diagnosis predicts that Z would resolve the symptoms"</li>
+          <li>Verify before remediation when possible</li>
+        </ul>
+
+        <h2>Why This Matters</h2>
+
+        <figure class="article-image">
+          <img src="../assets/images/knowledge-capture.png" alt="Properly structured cases becoming reusable knowledge resources">
+        </figure>
+
+        <p>
+          Getting these layers right has immediate practical benefits:
+        </p>
+
+        <p>
+          <strong>For triage</strong>: The problem statement tells you urgency. "Users can't checkout" is not the same priority as "nightly reports are delayed."
+        </p>
+
+        <p>
+          <strong>For investigation</strong>: Complete symptom enumeration prevents anchoring on misleading signals. The first symptom reported is rarely the most diagnostically useful.
+        </p>
+
+        <p>
+          <strong>For resolution</strong>: A verified diagnosis leads to targeted remediation. An assumed diagnosis leads to cargo-cult fixes that don't address the actual failure.
+        </p>
+
+        <p>
+          <strong>For knowledge capture</strong>: Properly structured cases&mdash;clear problem statement, complete symptoms, verified diagnosis&mdash;become reusable. They can inform documentation, training, and even automated detection rules.
+        </p>
+
+        <p>
+          Muddled cases where problem, symptoms, and diagnosis are conflated? They help no one, including the next engineer who encounters the same failure.
+        </p>
+
+        <h2>The Discipline</h2>
+
+        <p>
+          Next time a customer opens with "X is broken" or "Y is slow," pause before diving in.
+        </p>
+
+        <p>
+          Ask: Do I have a clear problem statement? (Business impact, in business terms.)
+        </p>
+
+        <p>
+          Ask: Do I have a complete symptom inventory? (All observable behaviors, with timing and scope.)
+        </p>
+
+        <p>
+          Ask: Am I treating proposed diagnoses as verified fact, or as hypotheses to test?
+        </p>
+
+        <p>
+          The symptoms are what we observe. The diagnosis is what we determine. The problem statement is why any of it matters.
+        </p>
+
+        <p>
+          Keep them separate. Get them all. Then troubleshoot.
+        </p>
+
+        <hr>
+
+        <p>
+          <em>This is part of an ongoing series on structured troubleshooting methodologies. The goal: make expertise transferable through process, not just tribal knowledge.</em>
+        </p>
+
+        <p><em>&mdash; grimm</em></p>
+
+      </article>
+    </main>
+
+    <footer>
+      <p>grimm | powered by stubbornness and caffeine</p>
+    </footer>
+  </div>
+</body>
+</html>
