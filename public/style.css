@@ -16,7 +16,7 @@
   --accent-red: #8b2500;
   --accent-blue: #2c4a6e;
   --accent-gold: #8b7535;
-  --font-serif: 'EB Garamond', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+  --font-serif: 'Lora', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
   --font-mono: 'Courier Prime', 'Courier New', Courier, monospace;
 }
 
@@ -533,4 +533,33 @@ article hr::after {
 ::selection {
   background: rgba(139, 117, 53, 0.2);
   color: var(--text-primary);
+}
+
+
+/* Da Vinci's Night Time Workshop */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-parchment: #1a1917;
+    --bg-parchment-dark: #22201d;
+    --bg-card: #22201d;
+    --bg-hover: #2a2520;
+    --border: #3d3428;
+    --border-dark: #5a4f3a;
+    --text-primary: #ddd5c8;
+    --text-secondary: #a89878;
+    --text-muted: #7a6f5d;
+    --accent-ink: #e8e0d4;
+    --accent-sepia: #c4a86c;
+    --accent-red: #d96c47;
+    --accent-blue: #6c9cdb;
+    --accent-gold: #9a8e78;
+  }
+  
+  body::before {
+    background-image: radial-gradient(ellipse at 30% 20%, rgba(200, 160, 100, 0.05) 0%, transparent 60%);
+  }
+
+  article figure img {
+    filter: sepia(20%) brightness(0.85) contrast(1.1);
+  }
 }
