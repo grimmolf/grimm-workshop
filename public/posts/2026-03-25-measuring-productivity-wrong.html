@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We're Measuring Productivity Wrong | grimm's workshop</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../index.html" class="site-title">grimm's workshop</a>
+      <p class="site-subtitle">// terminal enthusiast &amp; automation</p>
+      <nav>
+        <a href="../index.html">home</a>
+        <a href="../index.html#projects">projects</a>
+        <a href="../index.html#posts" class="active">posts</a>
+      </nav>
+    </header>
+
+    <main>
+      <a href="../index.html" class="back-link">back to posts</a>
+
+      <article>
+        <h1>We're measuring productivity wrong</h1>
+        <div class="meta">
+          2026-03-25 | productivity, AI strategy, capacity vs throughput
+        </div>
+
+        <p class="lead">
+          <em>And it's about to cost us again</em>
+        </p>
+
+        <h2>The widget trap</h2>
+
+        <p>Here's a question that sounds simple until it isn't: <em>What are you actually paying for when you hire someone?</em></p>
+
+        <p>Most employers would answer without hesitating. Productivity. Output. Widgets per hour, cases closed per quarter, tickets resolved. Simple math.</p>
+
+        <p>Except what you actually hired, when you hired a domain expert, is <strong>capacity</strong>: their expertise, their judgment, and their availability. You hired someone who knows things you don't, sees things you'd miss, and can respond when problems arrive without warning. The output they produce is a <em>byproduct</em> of well-deployed capacity. It's evidence that the engine is running. It's not the engine.</p>
+
+        <h2>The slack problem</h2>
+
+        <p>I'm a Technical Account Manager. My job is to be the expert in the room for my customers. I learn their environments, I anticipate their problems, and I'm there when something goes sideways. Something always goes sideways.</p>
+
+        <p>Here's what happens when my employer measures my value purely by throughput: I fill every minute with tasks. Cases, documentation, reports, meetings. My utilization looks excellent.</p>
+
+        <p>Then a customer calls. Something is broken.</p>
+
+        <p>But I'm full. Every minute is spoken for. I either drop something in progress or make the customer wait. Neither option is good. Both are <em>inevitable</em> when you optimize for 100% utilization.</p>
+
+        <p>You don't run your servers at 100% CPU and then act surprised when they can't handle a spike. But somehow we look at people and ask: "Why aren't you at 100%?" Because slack isn't waste. Slack is responsiveness capacity.</p>
+
+        <h2>When the metric eats the value</h2>
+
+        <p>Goodhart's Law: <em>When a measure becomes a target, it ceases to be a good measure.</em></p>
+
+        <p>Tell a TAM "close more cases" and they cherry-pick the easy ones. Tell a developer "commit more code" and they inflate the count with trivial changes. Tell a support rep "reduce handle time" and they rush past the real problem. The metric goes up. The value goes down.</p>
+
+        <p>And the value that matters most is invisible to begin with. Nobody tracks "customers who didn't churn because someone was available at the right moment." Nobody measures "escalations that didn't happen." This is the dark matter of customer success: it shapes outcomes and retains revenue, but it never shows up on a throughput dashboard.</p>
+
+        <p>The steady state of "customers were well taken care of" looks, to the throughput-obsessed organization, like mediocrity. I'd argue it should be the target.</p>
+
+        <h2>We've made this mistake before</h2>
+
+        <p>In the 1990s, American companies looked at their experienced domain experts and made a calculation. "This person costs $80,000 a year. This person overseas costs $15,000. They both produce code. They both handle tickets. Easy math."</p>
+
+        <p>They measured throughput, found a cheaper source, and pulled the trigger.</p>
+
+        <p>In many cases, the throughput <em>was</em> maintained. The same number of tickets got closed. The same lines got committed. But the capacity evaporated. The institutional knowledge. The judgment calls. The architect who could smell a bad design before it was built. The support engineer who knew that <em>this specific customer's</em> environment was weird in a way that made the standard fix dangerous.</p>
+
+        <p>That knowledge walked out the door, and it took years, and far more money, to rebuild.</p>
+
+        <h2>We're about to make it again</h2>
+
+        <p>Agentic AI tools are here, they work, and they're getting into the hands of everyone. Not just knowledge workers, but electricians, plumbers, field techs, small business owners. Anyone with a phone.</p>
+
+        <p>The question organizations are asking right now is exactly the same question they asked in the 1990s: <em>Can this thing do what my expensive expert does, but cheaper?</em></p>
+
+        <p>If you deploy AI as a cheaper replacement for the domain expert, you will get exactly the same result you got in the 90s. The throughput will be maintained. The capacity will evaporate.</p>
+
+        <p>An agentic tool optimized for throughput replaces the worker. An agentic tool optimized for capacity <em>amplifies</em> the worker. The difference isn't the technology. It's whether you understood what the worker was doing for you in the first place.</p>
+
+        <p>The electrician uses an AI assistant to look up code requirements and plan the sequence of a job. But the electrician is still the one who walks into a house with 1940s wiring and knows, from experience, that the code-compliant answer is actually the wrong answer here. The AI makes the electrician more effective. It doesn't make the electrician unnecessary.</p>
+
+        <h2>What it looks like when you get it right</h2>
+
+        <p>I work at Red Hat. I'm biased, and I'll say that upfront. But I have a front-row seat to what happens when a company builds its culture around the capacity model.</p>
+
+        <p>Red Hat's Technical Account Manager program sells capacity, not throughput. Here's how Red Hat describes what a TAM does: <em>"A direct relationship with a senior technical resource. They can prevent issues before they arise."</em> Relationship. Knowledge. Prevention. Not "cases closed per hour."</p>
+
+        <p>Forrester found a 379% ROI from TAM services. IDC found a 93% reduction in unplanned downtime. When a customer described their TAM, they said: <em>"A very smart and valuable member of my team."</em> That's capacity language.</p>
+
+        <p>Jim Whitehurst wrote <em>The Open Organization</em> about why engagement and autonomy outperform command-and-control productivity management. The company's <a href="https://github.com/red-hat-people-team/open-management-practices">Open Management Practices</a> say it plainly: <em>"Individuals are inspired to do their best work when they are connected to something bigger than themselves."</em></p>
+
+        <p>Red Hat has been articulating the capacity model for twenty years. What they haven't done yet is connect that philosophy to the question of how to deploy AI. That's the bridge this argument is trying to build.</p>
+
+        <h2>The prediction</h2>
+
+        <p>The organizations that get AI right will be the ones that already understood what their people were actually for.</p>
+
+        <p>If you've been measuring capacity, you already know where AI fits. It's a force multiplier for your best people.</p>
+
+        <p>If you've been measuring throughput, AI looks like a replacement. And you'll deploy it that way. And you'll get the same result the throughput-obsessed companies got when they offshored their expertise in the 90s.</p>
+
+        <p>The technology isn't the variable. Your management philosophy is.</p>
+
+        <p>The target isn't productivity maxing. It never was. The target is customer experience maxing, and productivity is what happens along the way when you deploy expertise and availability correctly.</p>
+
+        <p>The companies that figure this out will thrive. The ones that don't will learn the same lesson twice.</p>
+
+        <p><em>&mdash; grimm</em></p>
+
+      </article>
+    </main>
+
+    <footer>
+      <p>grimm | powered by stubbornness and caffeine</p>
+    </footer>
+  </div>
+</body>
+</html>
